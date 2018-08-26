@@ -1,22 +1,12 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 
-import styles from './styles.css'
+import Placeholder from './placeholder'
+import Timeout from './timeout'
 
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string
-  }
+if (React.Timeout === undefined) {
+  React.Timeout = Timeout
+}
 
-  render() {
-    const {
-      text
-    } = this.props
-
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
-  }
+if (React.Placeholder === undefined) {
+  React.Placeholder = Placeholder
 }
