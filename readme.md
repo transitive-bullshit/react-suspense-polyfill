@@ -1,23 +1,22 @@
 # react-suspense-polyfill
 
-> Polyfill for the React Suspense API.
+> Provides a basic polyfill for the upcoming React Suspense APIs.
 
 [![NPM](https://img.shields.io/npm/v/react-suspense-polyfill.svg)](https://www.npmjs.com/package/react-suspense-polyfill) [![Build Status](https://travis-ci.com/transitive-bullshit/react-suspense-polyfill.svg?branch=master)](https://travis-ci.com/transitive-bullshit/react-suspense-polyfill) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
-Provides a basic polyfill for the upcoming React Suspense APIs.
 
 - [x] `React.Placeholder`
 - [x] `React.Timeout`
 - [x] Supports React `v16`
 - [x] Supports React `v15`
 - [ ] Thorough compatibility tests
+- [ ] Port over an existing suspense demo
 
 
 ## Status
 
 This module is a **WIP** and is intended for experimenting with the upcoming React Suspense APIs. It is not yet ready to be incorporated into production builds.
 
-Note that the actual version of Suspense that will ship with React is significantly more complicated and efficient than the version iin this polyfill. It is meant solely for experimental purposes and to ease the burden of incrementally upgrading React.
+Note that the actual version of Suspense that will ship with React is [significantly](https://github.com/facebook/react/pull/12279) [more](https://github.com/facebook/react/pull/13397) [complicated](https://github.com/facebook/react/pull/13398) and efficient than the version in this polyfill. It is meant solely for experimental purposes and to ease the burden of incrementally upgrading React.
 
 I don't believe the current polyfill will play well with SSR.
 
