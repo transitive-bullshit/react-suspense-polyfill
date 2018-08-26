@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 
 export default class Timeout extends Component {
   static propTypes = {
-    ms: PropTypes.string.isRequired,
+    ms: PropTypes.number.isRequired,
     children: PropTypes.func.isRequired
   }
 
