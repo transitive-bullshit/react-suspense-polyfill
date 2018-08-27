@@ -6,7 +6,7 @@
   "private": true,
   "dependencies": {
     "prop-types": "^15.6.2",
-    "react": "^16.4.1",
+    "react": "^16.4.2",
     "react-async-elements": "^0.4.0",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",

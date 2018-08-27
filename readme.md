@@ -6,19 +6,29 @@
 
 - [x] `React.Placeholder`
 - [x] `React.Timeout`
-- [x] Supports React `v16`
-- [x] Supports React `v15`
+- [x] Support React `v16`
 - [ ] Thorough compatibility tests
-- [ ] Port over an existing suspense demo
+- [x] Basic suspense demo
+- [ ] Better suspense demo
 
 
 ## Status
 
-This module is a **WIP** and is intended for experimenting with the upcoming React Suspense APIs. It is not yet ready to be incorporated into production builds.
+This module is intended for understanding and experimenting with the upcoming React Suspense APIs.
 
-Note that the actual version of Suspense that will ship with React is [significantly](https://github.com/facebook/react/pull/12279) [more](https://github.com/facebook/react/pull/13397) [complicated](https://github.com/facebook/react/pull/13398) and efficient than the version in this polyfill. It is meant solely for experimental purposes and to ease the burden of incrementally upgrading React.
+Note that the actual version of Suspense that will ship with React is [significantly](https://github.com/facebook/react/pull/12279) [more](https://github.com/facebook/react/pull/13397) [complicated](https://github.com/facebook/react/pull/13398) and efficient than the version in this polyfill. It is meant solely for experimental purposes and to ease the burden of incremental upgrades.
 
-I don't believe the current polyfill will play well with SSR.
+The current polyfill will likely not play well with SSR.
+
+## How It Works
+
+At its core, React Suspense works by allowing an async component to throw a Promise from its `render` method.
+
+This polyfill mimics React's internal support for this behavior by implementing an [error boundary](https://reactjs.org/docs/error-boundaries.html) in the [Timeout](src/timeout.js) component. If the error boundary encounters a thrown Promise, it waits until that Promise resolves and then attempts to re-render its children. It also handles falling back to loading content if the Promise takes too long to resolve.
+
+The reason this polyfill does not support React `v15` is because it uses an error boundary to catch thrown Promises, which was officially introduced in React `v16`.
+
+With that being said, I hope this module and accompanying demos make it easier to understand React Suspense. 😄
 
 
 ## Install
@@ -30,19 +40,15 @@ npm install --save react-suspense-polyfill
 
 ## Usage
 
-To enable the polyfill, just import the module near the entrypoint of your app (before rendering anything with React).
+The only difference between using this polyfill and a suspense-enabled version of React, is that you must import `{ Placeholder }` from `react-suspense-polyfill` instead of from `React`.
 
-```js
-import 'react-suspense-polyfill'
-```
-
-Suspense demos and [react-async-elements](https://github.com/palmerhq/react-async-elements) will now function as expected if you were to build the latest, suspense-enabled version of React yourself.
+With this minor change, suspense demos and [react-async-elements](https://github.com/palmerhq/react-async-elements) will function as expected.
 
 ```js
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import 'react-suspense-polyfill'
+import { Placeholder } from 'react-suspense-polyfill'
 
 import { createCache, createResource } from 'simple-cache-provider'
 
@@ -66,9 +72,9 @@ class Example extends Component {
       <React.Fragment>
         <h1>Suspense</h1>
 
-        <React.Placeholder delayMs={500} fallback={<div>🌀 'Loading....'</div>}>
+        <Placeholder delayMs={500} fallback={<div>🌀 'Loading....'</div>}>
           <LazyThing />
-        </React.Placeholder>
+        </Placeholder>
       </React.Fragment>
     )
   }
@@ -80,13 +86,13 @@ ReactDOM.render(<Example />, document.getElementById('root'))
 In this example, the following rendering steps will occur:
 
 1. React will invoke `Example`'s `render` method.
-2. `React.Placeholder` will get rendered which will in turn attempt to render `LazyThing`.
+2. `Placeholder` will get rendered which will in turn attempt to render `LazyThing`.
 3. The `LazyThing` will try to load its resource from the cache but fail and throw a `Promise`.
-4. `React.Placeholder` (actually `React.Timeout` under the hood) will start waiting for that Promise to resolve and kick off a 500ms timeout.
-5. Currently, the `React.Placeholder` is rendering nothing.
-6. After 500ms, `React.Placeholder` will timeout and display its `fallback` loading content.
+4. `Placeholder` (actually `Timeout` under the hood) will catch this `Promise` in its error boundary `componentDidCatch`.
+5. `Placeholder` starts waiting for that Promise to resolve and kicks off a 500ms timeout. Currently, the `Placeholder` subtree is rendering nothing.
+6. After 500ms, `Placeholder` will timeout and display its `fallback` loading content.
 7. After another 1500ms (2000ms total), the `LazyThing` resource resolves.
-8. `React.Placeholder` realizes it's child has resolved and again attempts to re-render its child.
+8. `Placeholder` realizes it's child has resolved and again attempts to re-render its child.
 9. The `LazyThing` component synchronously renders the previously cached `Thing` component.
 10. All is right with the world 😃
 

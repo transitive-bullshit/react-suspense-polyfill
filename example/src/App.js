@@ -1,9 +1,7 @@
-import React, { Component, Placeholder } from 'react'
-import 'react-suspense-polyfill'
+import React, { Component } from 'react'
+import { Placeholder } from 'react-suspense-polyfill'
 
 import { Img } from 'react-async-elements'
-
-console.log(Placeholder)
 
 export default class App extends Component {
   render () {
@@ -11,9 +9,22 @@ export default class App extends Component {
       <div>
         <h1>Suspense Demo</h1>
 
-        <React.Placeholder delayMs={300} fallback={'Loading...'}>
-          <Img src='https://source.unsplash.com/random/4000x2000' />
-        </React.Placeholder>
+        <p>Refresh the page to load a new image.</p>
+
+        <Placeholder
+          delayMs={300}
+          fallback={'Loading...'}
+          suspense={(
+            <span>😮 SUSPENSE 😮</span>
+          )}
+        >
+          <Img
+            src='https://source.unsplash.com/random/4000x2000'
+            style={{
+              width: '50%'
+            }}
+          />
+        </Placeholder>
       </div>
     )
   }

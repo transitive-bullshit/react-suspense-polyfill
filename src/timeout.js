@@ -1,66 +1,69 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-
-// TODO:
-// - move children invocation outside render to make it pure..?
-// - possibly create new React Root?
 
 export default class Timeout extends Component {
   static propTypes = {
-    ms: PropTypes.number.isRequired,
+    ms: PropTypes.number,
+    suspense: PropTypes.node,
     children: PropTypes.func.isRequired
   }
 
   static defaultProps = {
-    ms: 0
+    ms: 0,
+    suspense: null
   }
 
   state = {
+    inSuspense: false,
     didExpire: false
   }
 
   _expireTimeout = null
   _suspender = null
 
+  componentDidCatch(err, info) {
+    if (typeof err.then === 'function') {
+      const suspender = err
+      this._suspender = suspender
+      this._initTimeout()
+      this.setState({ inSuspense: true })
+
+      const update = () => {
+        if (this._suspender !== suspender) return
+        this.setState({ inSuspense: false })
+        this._clearTimeout()
+
+        if (this.state.didExpire) {
+          this.setState({ didExpire: false })
+        } else {
+          this.forceUpdate()
+        }
+      }
+
+      suspender.then(update, update)
+    } else {
+      // rethrow non-promise errors
+      throw err
+    }
+  }
+
   render() {
     const {
-      children
+      children,
+      suspense
     } = this.props
 
     const {
+      inSuspense,
       didExpire
     } = this.state
 
-    try {
-      const ret = children(didExpire)
-      console.log(ret)
-    } catch (err) {
-      if (typeof err.then === 'function') {
-        const suspender = err
-        this._suspender = suspender
-        this._initTimeout()
-
-        const update = () => {
-          if (this._suspender !== suspender) return
-          this._clearTimeout()
-
-          if (this.state.didExpire) {
-            this.setState({ didExpire: false })
-          } else {
-            this.forceUpdate()
-          }
-        }
-
-        suspender.then(update, update)
-      } else {
-        // bubble up error to nearest error boundary
-        throw err
-      }
+    if (inSuspense && !didExpire) {
+      // optional: strictly for the purpose of demoing how suspense works
+      return suspense
+    } else {
+      return children(didExpire)
     }
-
-    return (
-      <span />
-    )
   }
 
   _initTimeout() {
