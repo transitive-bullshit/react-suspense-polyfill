@@ -4,8 +4,8 @@
 
 [![NPM](https://img.shields.io/npm/v/react-suspense-polyfill.svg)](https://www.npmjs.com/package/react-suspense-polyfill) [![Build Status](https://travis-ci.com/transitive-bullshit/react-suspense-polyfill.svg?branch=master)](https://travis-ci.com/transitive-bullshit/react-suspense-polyfill) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-- [x] `React.Placeholder`
-- [x] `React.Timeout`
+- [x] [React.Placeholder](src/placeholder.js)
+- [x] [React.Timeout](src/timeout.js)
 - [x] Support React `v16`
 - [ ] Thorough compatibility tests
 - [x] Basic suspense [demo](https://transitive-bullshit.github.io/react-suspense-polyfill/)
