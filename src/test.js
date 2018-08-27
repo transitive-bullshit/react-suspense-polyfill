@@ -1,7 +1,13 @@
-import ExampleComponent from './'
+import { Placeholder, Timeout } from '.'
 
-describe('ExampleComponent', () => {
+describe('Placeholder', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(Placeholder).toBeTruthy()
+  })
+})
+
+describe('Timeout', () => {
+  it('is truthy', () => {
+    expect(Timeout).toBeTruthy()
   })
 })
