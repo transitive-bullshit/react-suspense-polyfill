@@ -1,6 +1,6 @@
 {
   "name": "react-suspense-polyfill",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Polyfill for the React Suspense API.",
   "author": "transitive-bullshit",
   "license": "MIT",
