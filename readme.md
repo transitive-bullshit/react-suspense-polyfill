@@ -26,11 +26,11 @@ At its core, React Suspense works by allowing an async component to throw a Prom
 
 This polyfill mimics React's internal support for this behavior by implementing an [error boundary](https://github.com/transitive-bullshit/react-suspense-polyfill/blob/master/src/timeout.js#L24) in the [Timeout](src/timeout.js) component. If the error boundary encounters a thrown Promise, it waits until that Promise resolves and then attempts to re-render its children. It also handles falling back to loading content if the Promise takes too long to resolve.
 
-The reason this polyfill does not support React `v15` is because it uses an error boundary to catch thrown Promises, which was officially introduced in React `v16`.
+The reason this polyfill does not support React `v15` is because error boundaries weren't properly officially until React `v16`. If you have ideas on how to support this functionality in React `v15`, please submit an [issue](https://github.com/transitive-bullshit/react-suspense-polyfill/issues) and let's discuss!
 
-Note that React will log an error to the console regarding the thrown error, but this can *safely be ignored as it is expected*. Unfortunately, there is no way to [disable](https://github.com/facebook/react/issues/11098) this error reporting for these types of intentional use cases.
+Note that React will log an error to the console regarding the thrown error, but *this can safely be ignored*. Unfortunately, there is no way to [disable](https://github.com/facebook/react/issues/11098) this error reporting for these types of intentional use cases.
 
-With that being said, I hope this module and accompanying demos make it easier to understand React Suspense. 😄
+With that being said, I hope this module and accompanying demos make it easier to get up-to-speed with React Suspense. 😄
 
 
 ## Install
