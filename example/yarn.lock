@@ -5506,6 +5506,12 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-async-elements@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-async-elements/-/react-async-elements-0.4.0.tgz#189fd8076a7bd0335e3fba74adae6d3a8f93ca53"
+  dependencies:
+    simple-cache-provider "^0.7.0"
+
 react-dev-utils@^5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-5.0.2.tgz#7bb68d2c4f6ffe7ed1184c5b0124fcad692774d2"
@@ -6096,6 +6102,12 @@ shellwords@^0.1.1:
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
+
+simple-cache-provider@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/simple-cache-provider/-/simple-cache-provider-0.7.0.tgz#2b69a799782f983d56e3a091a36a8a17245d0103"
+  dependencies:
+    fbjs "^0.8.16"
 
 slash@^1.0.0:
   version "1.0.0"

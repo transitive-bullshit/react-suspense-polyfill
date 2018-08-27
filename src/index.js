@@ -4,9 +4,13 @@ import Placeholder from './placeholder'
 import Timeout from './timeout'
 
 if (React.Timeout === undefined) {
-  React.Timeout = Timeout
+  React.__proto__.Timeout = Timeout
+  console.log(React.Timeout)
 }
 
 if (React.Placeholder === undefined) {
-  React.Placeholder = Placeholder
+  React.__proto__.Placeholder = Placeholder
+  console.log(React.Placeholder)
 }
+
+export default { Placeholder, Timeout }

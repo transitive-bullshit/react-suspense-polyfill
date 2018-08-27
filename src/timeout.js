@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 // TODO:
@@ -32,7 +32,8 @@ export default class Timeout extends Component {
     } = this.state
 
     try {
-      return children(didExpire)
+      const ret = children(didExpire)
+      console.log(ret)
     } catch (err) {
       if (typeof err.then === 'function') {
         const suspender = err
@@ -56,6 +57,10 @@ export default class Timeout extends Component {
         throw err
       }
     }
+
+    return (
+      <span />
+    )
   }
 
   _initTimeout() {
