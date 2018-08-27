@@ -24,7 +24,7 @@ The current polyfill will likely not play well with SSR.
 
 At its core, React Suspense works by allowing an async component to throw a Promise from its `render` method.
 
-This polyfill mimics React's internal support for this behavior by implementing an [error boundary](https://reactjs.org/docs/error-boundaries.html) in the [Timeout](src/timeout.js) component. If the error boundary encounters a thrown Promise, it waits until that Promise resolves and then attempts to re-render its children. It also handles falling back to loading content if the Promise takes too long to resolve.
+This polyfill mimics React's internal support for this behavior by implementing an [error boundary](https://github.com/transitive-bullshit/react-suspense-polyfill/blob/master/src/timeout.js#L24) in the [Timeout](src/timeout.js) component. If the error boundary encounters a thrown Promise, it waits until that Promise resolves and then attempts to re-render its children. It also handles falling back to loading content if the Promise takes too long to resolve.
 
 The reason this polyfill does not support React `v15` is because it uses an error boundary to catch thrown Promises, which was officially introduced in React `v16`.
 
