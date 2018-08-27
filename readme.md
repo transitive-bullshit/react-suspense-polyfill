@@ -8,7 +8,7 @@
 - [x] `React.Timeout`
 - [x] Support React `v16`
 - [ ] Thorough compatibility tests
-- [x] Basic suspense demo
+- [x] Basic suspense [demo](https://transitive-bullshit.github.io/react-suspense-polyfill/)
 - [ ] Better suspense demo
 
 
