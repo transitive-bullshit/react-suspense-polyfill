@@ -7,6 +7,7 @@
 - [x] [React.Placeholder](src/placeholder.js)
 - [x] [React.Timeout](src/timeout.js)
 - [x] Support React `v16`
+- [x] In-depth [blog post](https://hackernoon.com/building-a-polyfill-for-react-suspense-f1c7baf18ca1)
 - [ ] Thorough compatibility tests
 - [x] Basic suspense [demo](https://transitive-bullshit.github.io/react-suspense-polyfill/)
 - [ ] Better suspense demo
@@ -17,8 +18,6 @@
 This module is intended for understanding and experimenting with the upcoming React Suspense APIs.
 
 Note that the actual version of Suspense that will ship with React is [significantly](https://github.com/facebook/react/pull/12279) [more](https://github.com/facebook/react/pull/13397) [complicated](https://github.com/facebook/react/pull/13398) and efficient than the version in this polyfill. It is meant solely for experimental purposes and to ease the burden of incremental upgrades.
-
-The current polyfill will likely not play well with SSR.
 
 ## How It Works
 
@@ -101,6 +100,7 @@ In this example, the following rendering steps will occur:
 
 ## Related
 
+- [blog post](https://hackernoon.com/building-a-polyfill-for-react-suspense-f1c7baf18ca1) - Gives more background and a deeper explanation of how the code works.
 - [react-suspense-starter](https://github.com/palmerhq/react-suspense-starter) - Alternative which bundles a pre-built version of Suspense-enabled React allowing you to experiment with React Suspense right meow.
 - [react-async-elements](https://github.com/palmerhq/react-async-elements) - Suspense-friendly async React elements for common situations.
 - [fresh-async-react](https://github.com/sw-yx/fresh-async-react) - More Suspense stuff (code, demos, and discussions).
