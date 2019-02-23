@@ -8,9 +8,8 @@
 - [x] [React.Timeout](src/timeout.js)
 - [x] Support React `v16`
 - [x] In-depth [blog post](https://hackernoon.com/building-a-polyfill-for-react-suspense-f1c7baf18ca1)
+- [x] Suspense [demo](https://transitive-bullshit.github.io/react-suspense-polyfill/)
 - [ ] Thorough compatibility tests
-- [x] Basic suspense [demo](https://transitive-bullshit.github.io/react-suspense-polyfill/)
-- [ ] Better suspense demo
 
 
 ## Status
