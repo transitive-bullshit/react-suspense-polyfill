@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Placeholder from './placeholder'
+import Suspense from './suspense'
 import Timeout from './timeout'
 
 /*
@@ -9,10 +9,10 @@ if (React.Timeout === undefined) {
   console.log(React.Timeout)
 }
 
-if (React.Placeholder === undefined) {
-  React.__proto__.Placeholder = Placeholder
-  console.log(React.Placeholder)
+if (React.Suspense === undefined) {
+  React.__proto__.Suspense = Suspense
+  console.log(React.Suspense)
 }
 */
 
-export { Placeholder, Timeout }
+export { Suspense, Timeout }

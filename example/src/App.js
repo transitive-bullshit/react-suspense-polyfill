@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Placeholder } from 'react-suspense-polyfill'
+import { Suspense } from 'react-suspense-polyfill'
 
 import { Img } from 'react-async-elements'
 
@@ -11,7 +11,7 @@ export default class App extends Component {
 
         <p>Refresh the page to load a new image.</p>
 
-        <Placeholder
+        <Suspense
           delayMs={300}
           fallback={'Loading...'}
           suspense={(
@@ -24,7 +24,7 @@ export default class App extends Component {
               width: '50%'
             }}
           />
-        </Placeholder>
+        </Suspense>
       </div>
     )
   }

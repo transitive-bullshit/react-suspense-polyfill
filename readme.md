@@ -4,7 +4,7 @@
 
 [![NPM](https://img.shields.io/npm/v/react-suspense-polyfill.svg)](https://www.npmjs.com/package/react-suspense-polyfill) [![Build Status](https://travis-ci.com/transitive-bullshit/react-suspense-polyfill.svg?branch=master)](https://travis-ci.com/transitive-bullshit/react-suspense-polyfill) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-- [x] [React.Placeholder](src/placeholder.js)
+- [x] [React.Suspense](src/placeholder.js)
 - [x] [React.Timeout](src/timeout.js)
 - [x] Support React `v16`
 - [x] In-depth [blog post](https://hackernoon.com/building-a-polyfill-for-react-suspense-f1c7baf18ca1)
@@ -41,7 +41,7 @@ npm install --save react-suspense-polyfill
 
 ## Usage
 
-The only difference between using this polyfill and a suspense-enabled version of React, is that you must import `{ Placeholder }` from `react-suspense-polyfill` instead of from `React`.
+The only difference between using this polyfill and a suspense-enabled version of React, is that you must import `{ Suspense }` from `react-suspense-polyfill` instead of from `React`.
 
 With this minor change, suspense demos and [react-async-elements](https://github.com/palmerhq/react-async-elements) will function as expected.
 
@@ -49,7 +49,7 @@ With this minor change, suspense demos and [react-async-elements](https://github
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import { Placeholder } from 'react-suspense-polyfill'
+import { Suspense } from 'react-suspense-polyfill'
 
 import { createCache, createResource } from 'simple-cache-provider'
 
@@ -73,9 +73,9 @@ class Example extends Component {
       <React.Fragment>
         <h1>Suspense</h1>
 
-        <Placeholder delayMs={500} fallback={<div>🌀 'Loading....'</div>}>
+        <Suspense delayMs={500} fallback={<div>🌀 'Loading....'</div>}>
           <LazyThing />
-        </Placeholder>
+        </Suspense>
       </React.Fragment>
     )
   }
@@ -87,13 +87,13 @@ ReactDOM.render(<Example />, document.getElementById('root'))
 In this example, the following rendering steps will occur:
 
 1. React will invoke `Example`'s `render` method.
-2. `Placeholder` will get rendered which will in turn attempt to render `LazyThing`.
+2. `Suspense` will get rendered which will in turn attempt to render `LazyThing`.
 3. The `LazyThing` will try to load its resource from the cache but fail and throw a `Promise`.
-4. `Placeholder` (actually `Timeout` under the hood) will catch this `Promise` in its error boundary `componentDidCatch`.
-5. `Placeholder` starts waiting for that Promise to resolve and kicks off a 500ms timeout. Currently, the `Placeholder` subtree is rendering nothing.
-6. After 500ms, `Placeholder` will timeout and display its `fallback` loading content.
+4. `Suspense` (actually `Timeout` under the hood) will catch this `Promise` in its error boundary `componentDidCatch`.
+5. `Suspense` starts waiting for that Promise to resolve and kicks off a 500ms timeout. Currently, the `Suspense` subtree is rendering nothing.
+6. After 500ms, `Suspense` will timeout and display its `fallback` loading content.
 7. After another 1500ms (2000ms total), the `LazyThing` resource resolves.
-8. `Placeholder` realizes it's child has resolved and again attempts to re-render its child.
+8. `Suspense` realizes it's child has resolved and again attempts to re-render its child.
 9. The `LazyThing` component synchronously renders the previously cached `Thing` component.
 10. All is right with the world 😃
 

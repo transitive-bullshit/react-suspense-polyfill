@@ -1,8 +1,8 @@
-import { Placeholder, Timeout } from '.'
+import { Suspense, Timeout } from '.'
 
-describe('Placeholder', () => {
+describe('Suspense', () => {
   it('is truthy', () => {
-    expect(Placeholder).toBeTruthy()
+    expect(Suspense).toBeTruthy()
   })
 })
 

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Timeout from './timeout'
 
-export default function Placeholder (props) {
+export default function Suspense (props) {
   const {
     delayMs,
     fallback,
@@ -17,14 +17,14 @@ export default function Placeholder (props) {
   )
 }
 
-Placeholder.propTypes = {
+Suspense.propTypes = {
   delayMs: PropTypes.number,
   fallback: PropTypes.node,
   suspense: PropTypes.node,
   children: PropTypes.node
 }
 
-Placeholder.defaultProps = {
+Suspense.defaultProps = {
   fallback: null,
   suspense: null,
   children: null
